@@ -1,0 +1,186 @@
+@mixin flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@mixin circle {
+    width: 50px;
+    height: 50px;
+    background-color: hsl(215, 14%, 26%);
+    border-radius: 50%;
+    @include shadow();
+}
+
+@mixin shadow {
+    box-shadow: rgba(14, 14, 14, 0.2) 0px 2px 8px 0px;
+}
+
+// ### Primary
+$Orange: hsl(25, 97%, 53%);
+// ### Neutral
+$White: hsl(0, 0%, 100%);
+$Light_Grey: hsl(217, 12%, 63%);
+$Medium_Grey: hsl(216, 12%, 54%);
+$Dark_Blue: hsl(213, 19%, 18%);
+$Very_Dark_Blue: hsl(216, 12%, 8%);
+// ### Font
+$Font_size: 15px;
+$Font_family: 'Overpass',
+sans-serif;
+;
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: $Font_family;
+    font-size: $Font_size;
+    background-color: $Very_Dark_Blue;
+    color: $White;
+    @include flex();
+    flex-direction: column;
+    height: 100vh;
+}
+
+.main_card_container {
+    width: 90%;
+    max-width: 415px;
+    padding: 33px 31px;
+    border-radius: 30px;
+    background-color: $Dark_Blue;
+    @include shadow();
+    .logo_circle {
+        @include circle();
+        @include flex();
+        margin-bottom: 40px;
+    }
+    .text {
+        .header {
+            margin-bottom: 20px;
+            h1 {
+                font-weight: 400;
+                font-size: 1.8em;
+                line-height: 1em;
+            }
+        }
+    }
+    .body_text {
+        color: $Light_Grey;
+        font-weight: 400;
+        line-height: 1.6em;
+    }
+    .rating_states {
+        @include flex();
+        justify-content: start;
+        gap: 20px;
+        margin: 30px 0;
+        .rating {
+            @include flex();
+            @include circle();
+            transition: all .2s ease-in;
+            color: $Light_Grey;
+        }
+        .rating:hover {
+            cursor: pointer;
+            background-color: $Light_Grey;
+            color: $White;
+        }
+        .active {
+            background-color: $Orange;
+            color: $White;
+        }
+    }
+    #submit_btn {
+        background-color: $Orange;
+        color: $White;
+        border: none;
+        outline: none;
+        width: 100%;
+        height: 40px;
+        border-radius: 20px;
+        text-transform: uppercase;
+        transition: all .2s ease-in;
+        cursor: pointer;
+        @include shadow();
+    }
+    #submit_btn:hover,
+    #submit_btn:active {
+        background-color: $White;
+        color: $Orange;
+    }
+    #thank_you_img {
+        margin-bottom: 32px;
+    }
+    .rating_tag {
+        display: block;
+        width: 200px;
+        margin: auto;
+        padding: 8px 0;
+        border-radius: 20px;
+        background-color: hsl(218, 6%, 34%);
+        color: $Orange;
+    }
+    .thankyou_title {
+        line-height: 29px;
+        margin-top: 40px;
+        margin-bottom: 20px;
+        font-size: 1.9em;
+    }
+}
+
+.thank_you_card {
+    text-align: center;
+    padding: 33px 35px;
+}
+
+.attribution {
+    margin-top: 50px;
+}
+
+@media screen and (max-width: 512px) {
+    @mixin circle {
+        width: 40px;
+        height: 40px;
+    }
+    .main_card_container {
+        padding: 30px 25px;
+        border-radius: 20px;
+        .logo_circle {
+            width: 40px;
+            height: 40px;
+            margin-bottom: 30px;
+        }
+        .text {
+            .header {
+                margin-bottom: 20px;
+                h1 {
+                    font-size: 1.6em;
+                }
+            }
+            .body_text {
+                font-size: 0.9em;
+                line-height: 1.4em;
+            }
+        }
+        .rating_states {
+            margin: 25px 0;
+        }
+    }
+}
+
+@media screen and (max-width: 400px) {
+    @mixin circle {
+        width: 40px;
+        height: 40px;
+    }
+    .main_card_container {
+        .rating_states {
+            .rating {
+                @include circle();
+            }
+        }
+    }
+}
